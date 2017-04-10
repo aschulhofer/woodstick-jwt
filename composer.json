@@ -1,0 +1,17 @@
+{
+    "name": "aschulhofer/woodstick-jwt",
+    "authors": [
+        {
+            "name": "aschulhofer",
+            "email": "andreas.schulhofer@gmail.com"
+        }
+    ],
+    "require": {
+        "lcobucci/jwt": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Woodstick\\": "src/"
+        }
+    }
+}
