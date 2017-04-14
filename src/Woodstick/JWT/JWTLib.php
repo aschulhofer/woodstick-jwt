@@ -2,6 +2,7 @@
 
 namespace Woodstick\JWT;
 
+use Woodstick\JWT\Token;
 use Woodstick\JWT\Claim\Subject;
 use Woodstick\JWT\Claim\Claim;
 use Woodstick\JWT\Claim\IssuedAt;
@@ -32,7 +33,9 @@ class JWTLib {
 
         $builder->sign($this->signer, $this->secret);
 
-        return $builder->getToken();
+        $token = $builder->getToken();
+
+        return new Token($token);
     }
 
     /**
@@ -41,13 +44,15 @@ class JWTLib {
     public function parse($token) {
         $parser = new Parser();
 
-        return $parser->parse((string) $token);
+        return new Token(
+            $parser->parse((string) $token)
+        );
     }
 
     /**
      *
      */
-    public function verify($token) {
-        return $token->verify($this->signer, $this->secret);
+    public function verify(Token $token) {
+        return $token->getInternalToken()->verify($this->signer, $this->secret);
     }
 }

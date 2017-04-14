@@ -44,11 +44,13 @@ class JWTTest {
         $token = $this->jwtLib->create($claims);
         $verification = $this->jwtLib->verify($token);
         $parsed = $this->jwtLib->parse(strval($token));
+        $isExpired = $token->isExpired();
 
         return response()->json([
             "token" => strval($token),
             "verify" => $verification,
-            "parsed" => strval($parsed)
+            "parsed" => strval($parsed),
+            "isExpired" => $isExpired,
         ]);
     }
 
