@@ -3,22 +3,20 @@
 namespace Woodstick\JWT;
 
 use Woodstick\JWT\Token;
-use Woodstick\JWT\Claim\Subject;
-use Woodstick\JWT\Claim\Claim;
-use Woodstick\JWT\Claim\IssuedAt;
 
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 class JWTLib {
 
-    protected $secret = 'secret';
-
+    protected $secret;
     protected $signer;
 
-    public function __construct() {
-        $this->signer = new Sha256();
+    public function __construct($secret, $signerType, $signerAlgo) {
+        $algo = "Lcobucci\\JWT\\Signer\\$signerType\\$signerAlgo";
+        
+        $this->secret = $secret;
+        $this->signer = new $algo();
     }
 
     /**

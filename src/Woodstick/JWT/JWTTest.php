@@ -15,7 +15,7 @@ class JWTTest {
     private $jwtLib;
 
     public function __construct() {
-        $this->jwtLib = new JWTLib();
+        $this->jwtLib = new JWTLib('secret', 'Hmac', 'Sha256');
     }
 
     /**
